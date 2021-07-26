@@ -2,7 +2,8 @@ class Solution {
 public:
     int m,n;
     pair<int,int>st,en;
-    vector<vector<vector<int>>>dp;
+    vector< vector< vector<int> > >dp;
+    
     int x[4]={-1 , 0 , 1 , 0};
     int y[4]={0 , 1 , 0 , -1};
     
@@ -13,7 +14,8 @@ public:
     bool valid(int i,int j,int mask,vector<vector<int>>& grid)
     {
         if(i>=0 and i<m and j>=0 and j<n and (mask&(1<<(i*n+j)))==0 and grid[i][j]!=-1) return true;
-        return false;
+        
+        return false; 
     }
     
     
@@ -41,6 +43,7 @@ public:
     }
         
     int uniquePathsIII(vector<vector<int>>& grid) {
+        
         m=grid.size(),n=grid[0].size();
         int mask=0;
        
