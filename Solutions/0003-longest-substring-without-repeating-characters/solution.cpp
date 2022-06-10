@@ -1,23 +1,23 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int maxilen=0,len=0,l=0,r,k,p;
-        int cnt[257]={0};
-        
-        for(r=0;r<s.length();r++)
-        {
-            k=s[r];
-            cnt[k]++;
-            while(cnt[k]>1)
-            {
-                p=s[l];
-                cnt[p]--;
+        int l=0,r=0,ans=0;
+        bool isPresent[256];
+        memset(isPresent,false,sizeof(isPresent));
+        while(r<s.length()) {
+            if(isPresent[s[r]]) {
+                while(s[l]!=s[r]) {
+                    isPresent[s[l]]=false;
+                    l++;
+                }
+                isPresent[s[l]]=false;
                 l++;
+            } else {
+                isPresent[s[r]]=true;
+                ans = max(ans , r-l+1);
+                r++;
             }
-            maxilen=max(maxilen,r-l+1);
         }
-        
-        return maxilen;
-        
+        return ans;
     }
 };
