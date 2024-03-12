@@ -1,12 +1,23 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        vector<int>pos1(256,-1),pos2(256,-1);
-        for(int i=0;i<s.length();i++) {
-            if(pos1[s[i]]!=pos2[t[i]]) return false;
-            pos1[s[i]]=i;
-            pos2[t[i]]=i;
+        int i;
+        map<char,char> hash,alpha;
+
+        for(i=0;i<s.length();i++) {
+            if(hash[t[i]]==NULL) {
+                hash[t[i]]=s[i];
+            } else if(hash[t[i]]!=s[i]) {
+                return false;
+            }
+
+            if(alpha[s[i]]==NULL) {
+                alpha[s[i]]=t[i];
+            } else if(alpha[s[i]]!=t[i]) {
+                return false;
+            }
         }
+
         return true;
     }
 };
