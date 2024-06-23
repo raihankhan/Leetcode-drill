@@ -9,16 +9,21 @@ jobs:
   update_cookies:
     runs-on: ubuntu-latest
 
+    env:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      leetcode-email: ${{ secrets.LEETCODE_EMAIL }}
+      leetcode-password: ${{ secrets.LEETCODE_PASSWORD }}
+
     steps:
+      - uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          leetcode-email: ${{ secrets.LEETCODE_EMAIL }}
-          leetcode-password: ${{ secrets.LEETCODE_PASSWORD }}
+          node-version: 18
 
-      - name: Install dependencies
-        run: npm ci
+      - name: pre-installations
+        run: npx puppeteer browsers install chrome
 
       - name: Fetch LeetCode cookies
         run: node fetchLeetCodeCookies.js

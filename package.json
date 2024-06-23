@@ -1,0 +1,22 @@
+{
+  "name": "update-lc-cookies",
+  "version": "1.0.0",
+  "description": "Automatically update LeetCode CSRF token and session cookie values in GitHub repository secrets every 2 weeks",
+  "main": "fetchLeetCodeCookies.js",
+  "scripts": {
+    "start": "node fetchLeetCodeCookies.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raihankhan/Leetcode-drill.git"
+  },
+  "author": "Raihan Khan",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "axios": "^1.7.2",
+    "node-rsa": "^1.1.1",
+    "puppeteer": "^22.12.0"
+  }
+}

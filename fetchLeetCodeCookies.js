@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 const fs = require('fs');
-const { encrypt } = require('node-rsa-secrets'); // Add this package as a dependency
+const { encrypt } = require('node-rsa'); // Add this package as a dependency
 
 const email = process.env.LEETCODE_EMAIL;
 const password = process.env.LEETCODE_PASSWORD;
@@ -49,9 +49,13 @@ async function updateGitHubSecret(secretName, secretValue) {
     // Navigate to LeetCode login page
     await page.goto('https://leetcode.com/accounts/login/');
 
-    // Fill in the email and password fields
-    await page.type('#id_login', email);
+// Fill in the email and password fields (using both ID and name-based selectors)
+    await page.waitForSelector('#id_login');
+    await page.type('#id_login', email);  // Use ID if available (preferred)
+    await page.type('input[name="login_email"]', email); // Use name-based selector as fallback
+
     await page.type('#id_password', password);
+    await page.type('input[name="login_password"]', password); // Use name-based selector as fallback
 
     // Click on the submit button
     await Promise.all([
